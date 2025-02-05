@@ -146,10 +146,9 @@ function CalculateStars(myList, otherList){
             otherList.splice(i, 1);
             _possibleStars += 1;
             i--; // Adjust index after splice
-            break; // Exit inner loop to avoid skipping elements
         }
     }
-
+    console.log(myList);
     console.log(stars);
     _test = stars + _possibleStars;
     console.log(_possibleStars);
