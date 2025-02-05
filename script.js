@@ -4,6 +4,11 @@ const _resultList2 = document.getElementById("resultList2");
 const _resultList3 = document.getElementById("resultList3");
 const _resultList4 = document.getElementById("resultList4");
 
+const _resultList5 = document.getElementById("resultList5");
+
+let _possibleStars = 0; 
+
+let _test;
 
 function AddTownHallLevels(){
     // Get the values of your clans town hall levels and store them in an list
@@ -32,7 +37,7 @@ function AddTownHallLevels(){
         }
         o++;
     }
-    _result.textContent = "Stars: " + CalculateStars(townHallLevels, enemyTownHallLevels);
+    _result.textContent = "Stars: " + CalculateStars(townHallLevels, enemyTownHallLevels) + "-" + _test;
 }
 
 function CalculateStars(myList, otherList){
@@ -125,7 +130,29 @@ function CalculateStars(myList, otherList){
             }
         }
     }
+    
+    // possible 1 star attacks
+    for(let i = 0; i < myList.length; i++){
+        if(Number(myList[i]) > 7){
+            const message = `Possible 1 star attack attacker: our th${myList[i]} defender: their th${otherList[i]}`;
+            console.log(message);
+
+            // Create a new list item and append it to the result list
+            const listItem = document.createElement("li");
+            listItem.textContent = message;
+            _resultList5.appendChild(listItem);
+
+            myList.splice(i, 1);
+            otherList.splice(i, 1);
+            _possibleStars += 1;
+            i--; // Adjust index after splice
+            break; // Exit inner loop to avoid skipping elements
+        }
+    }
 
     console.log(stars);
+    _test = stars + _possibleStars;
+    console.log(_possibleStars);
+
     return stars;
 }
